@@ -1,11 +1,21 @@
-import React from 'react';
-import { View, Button } from 'react-native';
+// src/screens/HomeScreen.js
+import React, { useEffect } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import useTransactions from '../hooks/useTransactions';
+import TransactionList from '../components/TransactionList';
 
-export default function HomeScreen({ navigation }) {
+const HomeScreen = () => {
+  const { transactions, loading, loadTransactions } = useTransactions();
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
+
   return (
     <View>
-      <Button title="Registrar Transacción" onPress={() => navigation.navigate('NuevaTransaccion')} />
-      <Button title="Ver Transacciones" onPress={() => navigation.navigate('Transacciones')} />
+      {loading ? <ActivityIndicator /> : <TransactionList transactions={transactions} />}
     </View>
   );
-}
+};
+
+export default HomeScreen;

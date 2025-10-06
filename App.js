@@ -1,12 +1,13 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './src/navigation/AppNavigation';
+import React, { useState } from 'react';
+import TransactionListScreen from './src/screens/TrasactionListScreen';
+import TransactionFormScreen from './src/screens/TransactionFormScreen';
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <AppNavigator />
-    </NavigationContainer>
-  );
-}
+const App = () => {
+  const [screen, setScreen] = useState('list');
 
+  return screen === 'list' 
+    ? <TransactionListScreen goToForm={() => setScreen('form')} />
+    : <TransactionFormScreen goBack={() => setScreen('list')} />;
+};
+
+export default App;

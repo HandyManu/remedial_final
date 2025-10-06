@@ -1,14 +1,24 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { Alert } from 'react-native';
+import categoryService from '../services/categoryService';
 
-export default function useCategories(tipo) {
+const useCategories = () => {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    axios.get(`http://localhost:4000/api/categories?tipo=${tipo}`)
-      .then(res => setCategories(res.data.data))
-      .catch(err => console.error(err));
-  }, [tipo]);
+  const loadCategories = async (tipo) => {
+    setLoading(true);
+    try {
+      const result = await categoryService.getAll({ tipo, activa: true });
+      if (result.success) setCategories(result.data);
+    } catch {
+      Alert.alert('Error', 'No se pudieron cargar las categorías');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return categories;
-}
+  return { categories, loading, loadCategories };
+};
+
+export default useCategories;
