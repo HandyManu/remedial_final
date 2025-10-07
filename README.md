@@ -1,5 +1,11 @@
 # 💰 Backend - App de Control de Gastos del Profesor Ricardo
 
+Realizado por :
+
+Manuel alejandro Ortega Rodriguez
+Hector Alejandro Murcia Rivera 
+Ronnie Javier Ramirez Alvarado 
+
 Backend completo en Node.js + Express + MongoDB para llevar control de ingresos y gastos.
 
 ## 🐛 Solución de Problemas
